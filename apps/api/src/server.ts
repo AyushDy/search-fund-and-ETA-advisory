@@ -5,9 +5,16 @@ import { createApp } from './app';
 
 async function start() {
   const config = getConfig();
-  await connectDatabase(config.MONGODB_URI, config.DNS_SERVERS);
-  const server = createServer(createApp());
+  const app = createApp();
+  const server = createServer(app);
   server.listen(config.PORT, () => console.log(`API listening on port ${config.PORT}`));
+  try {
+    await connectDatabase(config.MONGODB_URI, config.DNS_SERVERS);
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection failed; API is listening but not ready for database-backed requests', error);
+    process.exitCode = 1;
+  }
   const shutdown = async () => { server.close(); await disconnectDatabase(); process.exit(0); };
   process.on('SIGINT', () => void shutdown());
   process.on('SIGTERM', () => void shutdown());
