@@ -10,6 +10,8 @@ Create a production database and copy its connection string. Configure network a
 
 Create a Railway project from the repository and add a service connected to the repository.
 
+The repository includes `railway.json`, which explicitly configures the build command, start command, health check, and restart policy. Railway should use that file automatically.
+
 Use the repository root as the service root.
 
 Build command:
