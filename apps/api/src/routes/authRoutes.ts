@@ -8,7 +8,8 @@ import * as authService from '../services/authService';
 const router = Router();
 const cookieOptions = () => {
   const production = process.env.NODE_ENV === 'production';
-  return { httpOnly: true, secure: production || process.env.COOKIE_SECURE === 'true', sameSite: production ? 'none' as const : 'lax' as const };
+  const secure = production || process.env.COOKIE_SECURE === 'true';
+  return { httpOnly: true, secure, sameSite: secure ? 'none' as const : 'lax' as const };
 };
 
 router.post('/register', asyncHandler(async (request, response) => {
