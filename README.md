@@ -42,6 +42,8 @@ The frontend runs at `http://localhost:3000`; the API runs at `http://localhost:
 
 See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for environment configuration, seed data, administrator provisioning, verification, and troubleshooting.
 
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for Railway API and Vercel frontend deployment instructions.
+
 ## Quality checks
 
 See [docs/FEATURES.md](docs/FEATURES.md) for the canonical inventory of current routes, workflows, API groups, and intentionally unfinished areas.

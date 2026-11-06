@@ -6,7 +6,10 @@ import { emailTokenSchema, forgotPasswordSchema, internalAccountSchema, loginSch
 import * as authService from '../services/authService';
 
 const router = Router();
-const cookieOptions = () => ({ httpOnly: true, secure: Boolean(process.env.COOKIE_SECURE === 'true'), sameSite: 'lax' as const });
+const cookieOptions = () => {
+  const production = process.env.NODE_ENV === 'production';
+  return { httpOnly: true, secure: production || process.env.COOKIE_SECURE === 'true', sameSite: production ? 'none' as const : 'lax' as const };
+};
 
 router.post('/register', asyncHandler(async (request, response) => {
   const input = registerSchema.parse(request.body);
