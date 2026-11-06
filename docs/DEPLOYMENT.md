@@ -21,7 +21,7 @@ npm ci && npm run build:api
 Start command:
 
 ```text
-npm run start --workspace=@search-fund/api
+npm start
 ```
 
 Set the health check path to:

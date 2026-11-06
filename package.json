@@ -13,6 +13,8 @@
     "dev": "npm run dev:web & npm run dev:api",
     "build:web": "npm run build --workspace=@search-fund/web",
     "build:api": "npm run build --workspace=@search-fund/api",
+    "build": "npm run build:api",
+    "start": "npm run start --workspace=@search-fund/api",
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
   }
