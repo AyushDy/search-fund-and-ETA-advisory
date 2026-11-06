@@ -10,3 +10,26 @@ main { margin:0 auto; max-width:1280px; padding:48px clamp(20px,5vw,72px) 80px; 
 .toolbar { align-items:end; background:var(--surface); border:1px solid var(--line); display:grid; gap:12px; grid-template-columns:2fr repeat(3,1fr); margin:30px 0; padding:16px; } .toolbar label { font-size:12px; } .state-panel { align-items:center; background:var(--surface); border:1px solid var(--line); display:flex; flex-direction:column; gap:8px; justify-content:center; min-height:180px; padding:28px; text-align:center; } .state-panel p { color:var(--muted); margin:0; } .error-state { border-color:#efc9c5; } .spinner { border:3px solid var(--line); border-radius:50%; border-top-color:var(--teal); height:24px; width:24px; animation:spin .8s linear infinite; } @keyframes spin { to { transform:rotate(360deg); } } .detail-header { border-bottom:1px solid var(--line); margin-bottom:32px; padding-bottom:28px; } .detail-header h1 { font-size:42px; letter-spacing:-.03em; margin:8px 0; } .detail-layout { display:grid; gap:24px; grid-template-columns:2fr 1fr; } .detail-layout .panel h2 { font-size:22px; } .metric-panel { display:grid; gap:16px; grid-template-columns:repeat(2,1fr); } .metric-panel div { border-left:2px solid var(--teal); padding-left:12px; } .metric-panel span { color:var(--muted); display:block; font-size:13px; } .metric-panel strong { display:block; font-size:20px; margin-top:5px; }
 @media (max-width:900px) { .hero { grid-template-columns:1fr; min-height:0; padding-top:40px; } .hero-aside { align-self:start; } .business-grid { grid-template-columns:repeat(2,1fr); } .toolbar { grid-template-columns:1fr 1fr; } .detail-layout { grid-template-columns:1fr; } } @media (max-width:600px) { .site-header { min-height:64px; padding:0 16px; } nav { gap:12px; } nav a:not(.button), .link-button { font-size:12px; } .brand { font-size:13px; } main { padding:32px 16px 56px; } .hero h1 { font-size:44px; } .business-grid { grid-template-columns:1fr; } .toolbar { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } .detail-header h1 { font-size:34px; } }
 .account-panel { margin-top:24px; } .preference-row { align-items:flex-start; display:flex; flex-direction:row; gap:12px; font-weight:500; } .preference-row input { margin-top:3px; width:auto; } .preference-row span { display:grid; gap:4px; } .preference-row small { font-size:13px; font-weight:400; }
+
+/* Shared rhythm and restrained motion keep the interface calm and consistent. */
+:root { --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px; --radius:6px; }
+html { scroll-behavior:smooth; }
+body { overflow-x:hidden; }
+main { animation:page-enter .32s ease-out both; }
+.site-header { position:sticky; top:0; z-index:10; }
+.brand, nav a, .link-button, .button, .text-link, .save-button { transition:color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.button, .save-button, .panel, .business-card, .auth-panel, .state-panel, input, textarea, select { border-radius:var(--radius); }
+.button:hover:not(:disabled), .save-button:hover:not(:disabled) { box-shadow:0 6px 16px rgba(24,59,86,.12); transform:translateY(-1px); }
+.button:active:not(:disabled), .save-button:active:not(:disabled) { box-shadow:none; transform:translateY(0); }
+.button:disabled, .save-button:disabled { cursor:not-allowed; opacity:.58; }
+.business-card, .panel, .auth-panel { animation:surface-enter .38s ease-out both; }
+.business-card:hover { border-color:#b9d8d6; box-shadow:0 10px 24px rgba(24,59,86,.08); transform:translateY(-2px); transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.form-stack { gap:20px; }
+.button-row { gap:var(--space-3); }
+.section-heading { margin-top:var(--space-6); }
+.business-grid { gap:var(--space-5); }
+.metrics, .metric-panel { gap:var(--space-4); }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline:3px solid #a9dcd8; outline-offset:3px; }
+@keyframes page-enter { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes surface-enter { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }

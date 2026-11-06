@@ -8,6 +8,7 @@ const envSchema = z.object({
   JWT_ACCESS_SECRET: z.string().min(32).optional(),
   JWT_REFRESH_SECRET: z.string().min(32).optional(),
   WEB_ORIGIN: z.string().url().transform((value) => value.replace(/\/+$/, '')).default('http://localhost:3000'),
+  WEB_ORIGINS: z.string().optional().transform((value) => value ? value.split(',').map((origin) => origin.trim().replace(/\/+$/, '')).filter(Boolean) : []),
   DNS_SERVERS: z.string().default('1.1.1.1,8.8.8.8'),
   ALLOW_PUBLIC_INTERNAL_ROLES: z.string().optional().transform((value) => value === 'true'),
   RESEND_API_KEY: z.string().optional(),
@@ -24,6 +25,7 @@ export interface AppConfig {
   JWT_ACCESS_SECRET: string;
   JWT_REFRESH_SECRET: string;
   WEB_ORIGIN: string;
+  WEB_ORIGINS: string[];
   DNS_SERVERS: string;
   ALLOW_PUBLIC_INTERNAL_ROLES: boolean;
   RESEND_API_KEY?: string;
@@ -46,6 +48,7 @@ export function getConfig(): AppConfig {
     ...config,
     MONGODB_URI: config.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/search-fund-platform',
     JWT_ACCESS_SECRET: config.JWT_ACCESS_SECRET ?? 'development-access-secret-change-me-123456',
-    JWT_REFRESH_SECRET: config.JWT_REFRESH_SECRET ?? 'development-refresh-secret-change-me-123456'
+    JWT_REFRESH_SECRET: config.JWT_REFRESH_SECRET ?? 'development-refresh-secret-change-me-123456',
+    WEB_ORIGINS: Array.from(new Set([config.WEB_ORIGIN, ...config.WEB_ORIGINS]))
   };
 }

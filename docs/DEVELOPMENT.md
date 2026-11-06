@@ -27,6 +27,7 @@ MONGODB_URI=mongodb://127.0.0.1:27017/search-fund-platform
 JWT_ACCESS_SECRET=replace-with-at-least-32-random-characters
 JWT_REFRESH_SECRET=replace-with-at-least-32-random-characters
 WEB_ORIGIN=http://localhost:3000
+WEB_ORIGINS=http://localhost:3000
 DNS_SERVERS=1.1.1.1,8.8.8.8
 ALLOW_PUBLIC_INTERNAL_ROLES=false
 RESEND_API_KEY=
@@ -36,7 +37,7 @@ ENQUIRY_NOTIFICATION_EMAILS=
 COOKIE_SECURE=false
 ```
 
-`MONGODB_URI`, JWT secrets, Resend credentials, and internal notification recipients are server-only. Never prefix them with `NEXT_PUBLIC_`. Production requires MongoDB and JWT secrets; development fallback values are not accepted as production configuration. Set `WEB_ORIGIN` and `APP_BASE_URL` without trailing slashes.
+`MONGODB_URI`, JWT secrets, Resend credentials, and internal notification recipients are server-only. Never prefix them with `NEXT_PUBLIC_`. Production requires MongoDB and JWT secrets; development fallback values are not accepted as production configuration. Set `WEB_ORIGIN`, every `WEB_ORIGINS` entry, and `APP_BASE_URL` without trailing slashes.
 
 `ALLOW_PUBLIC_INTERNAL_ROLES` must remain `false` outside a controlled development environment. When enabled, the public registration form can create internal roles for demonstration purposes. The normal production path is administrator provisioning.
 

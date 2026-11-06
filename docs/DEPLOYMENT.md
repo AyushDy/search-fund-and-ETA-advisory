@@ -42,6 +42,7 @@ MONGODB_URI=<MongoDB Atlas connection string>
 JWT_ACCESS_SECRET=<long random secret>
 JWT_REFRESH_SECRET=<long random secret>
 WEB_ORIGIN=https://<frontend-domain>
+WEB_ORIGINS=https://<frontend-domain>,https://<preview-domain>
 COOKIE_SECURE=true
 ALLOW_PUBLIC_INTERNAL_ROLES=false
 DNS_SERVERS=1.1.1.1,8.8.8.8
@@ -85,7 +86,7 @@ Set the framework to Next.js and use the default output directory `.next`. Do no
 NEXT_PUBLIC_API_URL=https://<railway-api-domain>
 ```
 
-Deploy the frontend and copy its HTTPS domain back into Railway's `WEB_ORIGIN` and `APP_BASE_URL` values without a trailing slash. Redeploy the API after changing those values.
+Deploy the frontend and copy its HTTPS production and approved preview domains into Railway's `WEB_ORIGIN`/`WEB_ORIGINS` and `APP_BASE_URL` values without trailing slashes. Redeploy the API after changing those values.
 
 ## 4. Post-deployment checks
 
