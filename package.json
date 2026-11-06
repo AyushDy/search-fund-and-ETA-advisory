@@ -1,0 +1,19 @@
+{
+  "name": "search-fund-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Search Fund and ETA Advisory Platform monorepo",
+  "workspaces": [
+    "apps/web",
+    "apps/api"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@search-fund/web",
+    "dev:api": "npm run dev --workspace=@search-fund/api",
+    "dev": "npm run dev:web & npm run dev:api",
+    "build:web": "npm run build --workspace=@search-fund/web",
+    "build:api": "npm run build --workspace=@search-fund/api",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}

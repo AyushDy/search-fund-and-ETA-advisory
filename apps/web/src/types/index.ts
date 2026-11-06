@@ -1,0 +1,8 @@
+export type Role = 'INVESTOR' | 'STAFF' | 'APPROVER' | 'ADMIN';
+export interface User { id: string; firstName: string; lastName: string; email: string; phone: string | null; emailVerified: boolean; phoneVerified: boolean; notificationPreferences: { email: boolean; inApp: boolean }; role: Role; status: string }
+export interface FinancialValue { amount: number; currency: string; period?: string }
+export interface BusinessListing { id: string; publicTitle: string; legalBusinessName?: string; publicWebsite?: string; shortSummary: string; description?: string; industry: string; subIndustry?: string; country?: string; region?: string; city?: string; productsAndServices?: string; yearsOperating?: number; employeeRange?: string; identityMode: 'ANONYMIZED' | 'IDENTIFIED'; revenue?: FinancialValue; ebitda?: FinancialValue; sde?: FinancialValue; askingPrice?: FinancialValue; status?: string; internalNotes?: string; featured?: boolean }
+export interface SavedBusiness { id: string; savedAt: string; listing: BusinessListing }
+export type EnquiryStatus = 'NEW' | 'IN_REVIEW' | 'CONTACTED' | 'QUALIFIED' | 'DECLINED' | 'CLOSED';
+export interface Enquiry { id: string; listingId: string; status: EnquiryStatus; message?: string; budget?: number; experience?: string; reason?: string; createdAt: string; updatedAt: string; listing?: BusinessListing; investor?: { id: string; name: string; email?: string }; investorId?: string; assignedTo?: { id: string; name?: string; email?: string } | null; internalNote?: string; contactDecision?: string; followUpAt?: string; followUpNote?: string }
+export interface ApiResponse<T> { success: boolean; message: string; data: T }

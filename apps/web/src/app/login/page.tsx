@@ -1,0 +1,8 @@
+'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useAuth } from '@/components/AuthProvider';
+
+export default function LoginPage() { const { signIn } = useAuth(); const router = useRouter(); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState(''); const [busy, setBusy] = useState(false); async function submit(event: React.FormEvent) { event.preventDefault(); setBusy(true); setError(''); try { const user = await signIn(email, password); router.push(user.role === 'INVESTOR' ? '/dashboard' : '/staff'); } catch (reason) { setError(reason instanceof Error ? reason.message : 'Unable to sign in'); } finally { setBusy(false); } } return <main className="narrow"><section className="auth-panel"><span className="eyebrow">Northstar Advisory</span><h1>Welcome back</h1><p className="muted">Sign in to access your account.</p><form className="form-stack" onSubmit={submit}><label>Email address<input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" /></label><label>Password<input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" /></label>{error && <p className="error-state" role="alert">{error}</p>}<button className="button" disabled={busy}>{busy ? 'Signing in...' : 'Sign in'}</button></form><p className="muted">New to the platform? <Link className="text-link" href="/register">Create an investor account</Link></p></section></main>; }

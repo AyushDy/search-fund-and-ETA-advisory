@@ -1,0 +1,10 @@
+import { z } from 'zod';
+
+const optionalText = (max: number) => z.string().trim().max(max).optional();
+const financial = z.object({ amount: z.number().finite().nonnegative(), currency: z.string().regex(/^[A-Za-z]{3}$/).transform((value) => value.toUpperCase()), period: optionalText(40) });
+export const listingSchema = z.object({
+  publicTitle: z.string().trim().min(1).max(160), legalBusinessName: optionalText(160), identityMode: z.enum(['ANONYMIZED', 'IDENTIFIED']), internalWebsite: optionalText(300), publicWebsite: optionalText(300), shortSummary: z.string().trim().min(1).max(500), description: optionalText(10000), industry: z.string().trim().min(1).max(100), subIndustry: optionalText(100), country: optionalText(100), region: optionalText(100), city: optionalText(100), productsAndServices: optionalText(5000), yearsOperating: z.number().finite().nonnegative().max(500).optional(), employeeRange: optionalText(80), revenue: financial.optional(), ebitda: financial.optional(), sde: financial.optional(), askingPrice: financial.optional(), sellerMotivation: optionalText(5000), internalNotes: optionalText(10000), featured: z.boolean().optional()
+});
+export const listingUpdateSchema = listingSchema.partial();
+export const rejectionSchema = z.object({ reason: z.string().trim().min(5).max(2000) });
+export const directoryQuerySchema = z.object({ page: z.coerce.number().int().positive().default(1), pageSize: z.coerce.number().int().positive().max(50).default(12), search: z.string().trim().max(100).optional(), industry: z.string().trim().max(100).optional(), country: z.string().trim().max(100).optional(), region: z.string().trim().max(100).optional(), city: z.string().trim().max(100).optional(), minRevenue: z.coerce.number().nonnegative().optional(), maxRevenue: z.coerce.number().nonnegative().optional(), minAskingPrice: z.coerce.number().nonnegative().optional(), maxAskingPrice: z.coerce.number().nonnegative().optional(), sort: z.enum(['newest', 'revenue_desc', 'asking_asc']).default('newest') });

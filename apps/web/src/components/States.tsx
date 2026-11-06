@@ -1,0 +1,3 @@
+export function LoadingState({ label = 'Loading' }: { label?: string }) { return <div className="state-panel" role="status"><span className="spinner" />{label}...</div>; }
+export function EmptyState({ title, message }: { title: string; message: string }) { return <div className="state-panel"><h3>{title}</h3><p>{message}</p></div>; }
+export function ErrorState({ message, retry }: { message: string; retry?: () => void }) { return <div className="state-panel error-state"><h3>Something went wrong</h3><p>{message}</p>{retry && <button className="button button-secondary" onClick={retry}>Try again</button>}</div>; }
