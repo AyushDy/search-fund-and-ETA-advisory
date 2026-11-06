@@ -69,15 +69,15 @@ Do not run `seed:demo` against the production database.
 
 ## 3. Vercel frontend
 
-Create a Vercel project from the same repository. Use the repository root so npm workspaces resolve correctly.
+Create a Vercel project from the same repository. Set the Vercel **Root Directory** to `apps/web` so Vercel detects the Next.js output directory correctly.
 
 Build command:
 
 ```text
-npm run build:web
+npm run build
 ```
 
-Set the framework to Next.js and use the default output directory.
+Set the framework to Next.js and use the default output directory `.next`. Do not set `apps/web/.next` as a custom output path when the root directory is already `apps/web`.
 
 ### Vercel variables
 
@@ -85,7 +85,7 @@ Set the framework to Next.js and use the default output directory.
 NEXT_PUBLIC_API_URL=https://<railway-api-domain>
 ```
 
-Deploy the frontend and copy its HTTPS domain back into Railway's `WEB_ORIGIN` and `APP_BASE_URL` values. Redeploy the API after changing those values.
+Deploy the frontend and copy its HTTPS domain back into Railway's `WEB_ORIGIN` and `APP_BASE_URL` values without a trailing slash. Redeploy the API after changing those values.
 
 ## 4. Post-deployment checks
 

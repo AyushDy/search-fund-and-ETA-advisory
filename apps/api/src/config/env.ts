@@ -7,12 +7,12 @@ const envSchema = z.object({
   MONGODB_URI: z.string().min(1).optional(),
   JWT_ACCESS_SECRET: z.string().min(32).optional(),
   JWT_REFRESH_SECRET: z.string().min(32).optional(),
-  WEB_ORIGIN: z.string().url().default('http://localhost:3000'),
+  WEB_ORIGIN: z.string().url().transform((value) => value.replace(/\/+$/, '')).default('http://localhost:3000'),
   DNS_SERVERS: z.string().default('1.1.1.1,8.8.8.8'),
   ALLOW_PUBLIC_INTERNAL_ROLES: z.string().optional().transform((value) => value === 'true'),
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().email().optional(),
-  APP_BASE_URL: z.string().url().default('http://localhost:3000'),
+  APP_BASE_URL: z.string().url().transform((value) => value.replace(/\/+$/, '')).default('http://localhost:3000'),
   ENQUIRY_NOTIFICATION_EMAILS: z.string().optional(),
   COOKIE_SECURE: z.string().optional().transform((value) => value === 'true')
 });
